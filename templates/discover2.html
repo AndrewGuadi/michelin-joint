@@ -50,14 +50,26 @@
 
 {% block scripts %}
 <script>
+    // Function to toggle the active state
+    function toggleActiveState(buttonId) {
+        document.getElementById('toggleNameSearch').classList.remove('btn-active');
+        document.getElementById('toggleLocationSearch').classList.remove('btn-active');
+        document.getElementById(buttonId).classList.add('btn-active');
+    }
+
+    // Initially set 'Name Search' as active
+    document.getElementById('toggleNameSearch').classList.add('btn-active');
+
     document.getElementById('toggleNameSearch').addEventListener('click', function() {
         document.getElementById('nameSearch').classList.remove('collapse');
         document.getElementById('locationSearch').classList.add('collapse');
+        toggleActiveState('toggleNameSearch');
     });
 
     document.getElementById('toggleLocationSearch').addEventListener('click', function() {
         document.getElementById('locationSearch').classList.remove('collapse');
         document.getElementById('nameSearch').classList.add('collapse');
+        toggleActiveState('toggleLocationSearch');
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

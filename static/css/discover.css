@@ -63,6 +63,10 @@ form{
     border-right: 2px solid white;
   }
 
+  .btn-active {
+    color: white;
+    background-color: var(--bs-btn-hover-bg); /* Bootstrap primary color for example */
+}
 
   a{
     text-decoration: none;
