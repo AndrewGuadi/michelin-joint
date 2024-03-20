@@ -1,0 +1,37 @@
+
+
+{% if restaurants %}
+    <div class="container">
+    {% for res in restaurants %}
+        <!-- Open a new row for the first card and then every subsequent pair of cards -->
+        {% if loop.index0 % 2 == 0 %}
+        <div class="row">
+            {% endif %}
+
+            <div class="col-6 mb-3">
+                <a href="{% if res.city %}{{ url_for('top_restaurants', restaurant=res.name) }}{% else %}{{ url_for('restaurants', restaurant_name=res.name) }}{% endif %}">
+                    <div class="card custom-card">
+                        <img class="card-img-top" src="{{ res.image_url }}" alt="Restaurant Image">
+                        <p>{{ res.url }}</p>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ res.name }}</h5>
+                            <div class="d-flex">
+                                <p class="card-text{% if res.rank %} rank{% endif %} justify-content-start">{{ res.distinction if res.distinction else res.rank }}</p>
+                                <p class="card-text">{{ res.style if res.style else res.city }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Close the row after every second card or if it's the last card in the list -->
+        {% if loop.index0 % 2 == 1 or loop.last %}
+            </div> <!-- This div closes the row -->
+        {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+<div class="container">
+    <h2>There were no results found.</h2>
+</div>
+{% endif %}

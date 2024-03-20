@@ -1,0 +1,43 @@
+
+
+.body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.res-image {
+    width: 100%; /* or a specific width */
+    height: 300px; /* or a specific height */
+    background-size: cover;
+    background-position: center;
+
+}
+
+.primary-res-items{
+    font-size: 6vw;
+    font-weight:500
+}
+
+.res-items{
+    font-weight:700;
+    padding-left: 5vw;
+    text-align: start;
+}
+
+.btn-custom {
+    color:white;
+    font-size: 5vw;;
+    background-color:var(--secondary-color); /* Custom color */
+    border: 2px solid white;
+    border-radius: 15px; /* Optional: for square edges */
+    /* Add more custom styles if needed */
+}
+
+.checkin-row{
+    position: relative;
+    margin-left:5vw;
+    margin-right:5vw;
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: white;
+    color:black;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Top 100 Michelin Restaurants{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/top.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<button onclick="topFunction()" id="scrollTopBtn" title="Go to top">Top</button>    
+<!-- Other HTML content -->
+{% include 'restaurant_partial.html' %}
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ url('static', filename='js/discover.js')}}"></script>
+{% endblock %}

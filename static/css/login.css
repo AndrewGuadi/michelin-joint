@@ -1,0 +1,115 @@
+
+
+
+body{
+    text-align: center;
+}
+
+#title-name{
+    text-align: center;
+    font-size:32px;
+    font-family: 'Pacifico', cursive
+}
+
+.discover-prestige{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.774);
+    color:white;
+    font-size: 24px;
+    border-radius:5px;
+}
+.login-form-wrapper{
+    background-image:url('../img/login_background.jpg');
+    background-size:cover;
+    background-position: contain;
+    overflow: auto;
+
+
+}
+
+.body-text{
+    margin:auto;
+    color:black;
+    text-align: center;
+    font-size:1rem;
+}
+
+.create-account{
+    display:block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding:20px;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.541);
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.login-form {
+    border: 2px solid white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.541);
+}
+
+.login-form input, .create-account input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.login-form p {
+    margin: 0;
+    padding: 5px;
+}
+
+.login-form #submit, button{
+    width:25vw;
+    padding:5px;
+    margin:0;
+}
+
+.login-form button{
+    color: white;
+    margin-top:5px;
+}
+
+.bottom-info{
+    background-color: rgba(0, 0, 0, 0.829);
+    overflow:auto;
+    margin:auto;
+    color:white;
+    text-align: center;
+    font-weight:600;
+    font-size:16px;
+}
+
+.info-image{
+    background-size: contain;
+    border-radius: 50%;
+    border: 2px solid white;
+    height:25vw;
+    width:25vw;
+    
+}
+
+.track{
+    background-image: url('../img/track.jpg');
+}
+
+.connect{
+    background-image: url('../img/connect.jpg');
+}
+
+.search{
+    background-image: url('../img/search.jpg')
+}

@@ -1,0 +1,91 @@
+
+
+.container{
+    position:relative;
+    margin:5vw auto;
+    text-align: center;
+
+}
+.card-text{
+    padding:auto;
+    margin:auto;
+    position:relative;
+    
+}
+
+.custom-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.custom-card .card-body {
+    flex-grow: 1; /* This makes the card body fill the available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body > .d-flex {
+    margin-top: auto; /* This pushes your flex items to the bottom if there is space */
+}
+
+
+.rank{ 
+    color:var(--secondary-color);
+    padding-right:3vw;
+    font-size: 1.5em;
+    font-weight:600;
+}
+
+.card-body .d-flex{
+    padding: 2vw;
+}
+
+.card-body .d-flex{
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.card-body .card-text{
+    margin: auto;
+    justify-content: start;
+    align-items: center;
+}
+
+
+#scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+  }
+  #scrollTopBtn:hover {
+    background-color: #0056b3;
+  }
+  /* Custom CSS for the arrow */
+  #scrollTopBtn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+  }
+
+
+  a{
+    text-decoration: none;
+}

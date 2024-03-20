@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Discover{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/discover.css') }}">
+{% endblock %}
+
+{% block content %}
+<form method="GET" action="/">
+    <input type="text" name="query" placeholder="Search restaurants...">
+    <input type="submit" value="Search">
+</form>
+
+
+<button onclick="topFunction()" id="scrollTopBtn" title="Go to top">Top</button>    
+<!-- Other HTML content -->
+{% include 'restaurant_partial.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/3.0.6/infinite-scroll.pkgd.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/discover.js') }}"></script>
+{% endblock %}

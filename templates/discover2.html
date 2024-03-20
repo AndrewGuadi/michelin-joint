@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Discover{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/discover.css') }}">
+{% endblock %}
+
+{% block content %}
+<form method="GET" action="{{ url_for('search_results') }}" class="d-flex flex-column align-items-center my-3">
+    
+
+    <!-- Toggle Buttons -->
+    <div class="btn-group" role="group" aria-label="Search options">
+        <button type="button" class="btn btn-outline-secondary" id="toggleNameSearch">Name Search</button>
+        <button type="button" class="btn btn-outline-secondary" id="toggleLocationSearch">Location Search</button>
+    </div>
+
+    <!-- Name Search Input -->
+    <div id="nameSearch" class="w-75">
+        {{ form.query(class="form-control my-2", placeholder="Search by Chef or Restaurant") }}
+    </div>
+
+    <!-- Location Search Input (Initially Hidden) -->
+    <div id="locationSearch" class="collapse w-75">
+        {{ form.location(class="form-control my-2", placeholder="Search by address") }}
+    </div>
+
+    <!-- Michelin Stars Radio Buttons -->
+    <div class="d-flex justify-content-center">
+        {% for subfield in form.star_count %}
+        <div class="form-check form-check-inline">
+            {{ subfield(class="form-check-input") }} 
+            <label class="form-check-label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Style Dropdown -->
+    <div class="w-75">
+        {{ form.style(class="form-select my-2") }}
+    </div>
+
+    <!-- Search Button -->
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+
+<button onclick="topFunction()" id="scrollTopBtn" title="Go to top">Top</button>
+{% include 'restaurant_partial.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('toggleNameSearch').addEventListener('click', function() {
+        document.getElementById('nameSearch').classList.remove('collapse');
+        document.getElementById('locationSearch').classList.add('collapse');
+    });
+
+    document.getElementById('toggleLocationSearch').addEventListener('click', function() {
+        document.getElementById('locationSearch').classList.remove('collapse');
+        document.getElementById('nameSearch').classList.add('collapse');
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/3.0.6/infinite-scroll.pkgd.min.js"></script>
+<script src="{{ url_for('static', filename='js/discover.js') }}"></script>
+{% endblock %}
