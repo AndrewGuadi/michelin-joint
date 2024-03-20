@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from forms import LoginForm, CreateAccount, DiscoverForm
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from flask_sqlalchemy import SQLAlchemy
+from extensions import db
 from sqlalchemy.exc import IntegrityError
 from helpers import read_json, check_stars
 from location_helpers import haversine, get_coordinates
@@ -12,7 +12,7 @@ app = Flask(__name__)
 #database info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reconegut.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db.init_app(app)
 
 #import the tables
 from models import User, Restaurant, CheckIn, Friendship
@@ -133,7 +133,9 @@ def search_results():
     per_page = 10
     print([item.data for item in form])
     query = form.query.data.strip()
-    location = form.location.data.strip()  # Assuming this is the user's location input
+    location = None
+    if form.location.data:
+        location = form.location.data.strip()  # Assuming this is the user's location input
     style = form.style.data
     star_count = form.star_count.data
 
