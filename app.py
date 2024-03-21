@@ -151,24 +151,27 @@ def search_results():
 
     # Fetch the filtered restaurants list before sorting by location
     filtered_restaurants = query_conditions.all()
-    filtered_restaurants = [res for res in filtered_restaurants if res.longitude is not None and res.latitude is not None]
-    for resta in filtered_restaurants:
-        print(resta.name)
-    # Check if location filter is applied and sort by distance
+    
+    # Sort by location if necessary
     if location:
-        print(location)
-        # Convert user_location string to coordinates here if needed
-        user_location = get_coordinates(location)  # Example coordinates, replace with actual user location
+        filtered_restaurants = [res for res in filtered_restaurants if res.longitude is not None and res.latitude is not None]
+        user_location = get_coordinates(location)
         filtered_restaurants = sorted(filtered_restaurants, key=lambda res: haversine(user_location[1], user_location[0], res.longitude, res.latitude))
     
-    # Manual pagination after sorting
+    total_restaurants = len(filtered_restaurants)
+    total_pages = (total_restaurants + per_page - 1) // per_page
+
+    # Manual pagination
     start = (page - 1) * per_page
     end = start + per_page
     paginated_restaurants = filtered_restaurants[start:end]
 
+    #reset the form
+    form = DiscoverForm()
     return render_template('discover2.html', 
                            restaurants=paginated_restaurants, 
-                           pagination=None,  # Handle pagination in template if necessary
+                           total_pages=total_pages,  # Added to handle pagination in the template
+                           current_page=page,
                            form=form)
 
 

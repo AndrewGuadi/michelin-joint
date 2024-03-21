@@ -3,15 +3,21 @@ let batchCounter = 0;
 $(document).ready(function() {
     $('.container').infiniteScroll({
         path: function() {
+            const totalPages = $('#total_pages').val(); // Value from a hidden input in the template
+            const nextPage = this.loadCount + 1;
+            if (nextPage > totalPages) {
+                return null; // Stops the infinite scroll when all pages are loaded
+            }
+
             let currentPath = window.location.pathname;
             if (currentPath.includes('/discover')) {
-                return '/discover?page=' + (this.loadCount + 1);
+                return '/discover?page=' + nextPage;
             } else if (currentPath.includes('/search_results')) {
                 let queryParams = new URLSearchParams(window.location.search);
                 let query = queryParams.get('query') || '';
                 let style = queryParams.get('style') || '';
                 let star_count = queryParams.get('star_count') || '';
-                return `/search_results?page=${this.loadCount + 1}&query=${query}&style=${style}&star_count=${star_count}`;
+                return `/search_results?page=${nextPage}&query=${query}&style=${style}&star_count=${star_count}`;
             }
         },
         append: '.container',
