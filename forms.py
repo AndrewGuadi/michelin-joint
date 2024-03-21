@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, SelectField, RadioField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-
+from models import Restaurant
 
 
 
@@ -36,5 +36,24 @@ class DiscoverForm(FlaskForm):
     query = StringField('Search by Chef or Restaurant')
     location = StringField('Search by Location')
     star_count = RadioField('Michelin Stars', choices=[('', 'All Stars'), ('1', '1 Star'), ('2', '2 Stars'), ('3', '3 Stars')], default='')
-    style = SelectField('Select Style', choices=[('', 'Select Style'), ('Style1', 'Style1'), ('Style2', 'Style2'), ('Style3', 'Style3'), ('Style4', 'Style4')])
+    style = SelectField('Select Style', choices=[], coerce=str)  # Initialize with empty choices
     submit = SubmitField('Search')
+
+    def __init__(self, *args, **kwargs):
+        super(DiscoverForm, self).__init__(*args, **kwargs)
+        self.style.choices = self.get_style_choices()  # Set choices dynamically during initialization
+
+    def get_style_choices(self):
+        # Fetch styles from the database or any other source
+        available_styles = Restaurant.query.with_entities(Restaurant.style).distinct().all()
+
+        # Print each style for debugging purposes
+        for style in available_styles:
+            print(style[0])
+
+        # Format the styles into choices expected by SelectField
+        choices = [('', 'Select Style')]  # Initial empty choice
+        for style in available_styles:
+            if style[0]:  # Check if the style is not empty
+                choices.append((style[0], style[0]))
+        return choices
