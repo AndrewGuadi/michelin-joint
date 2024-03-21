@@ -16,7 +16,8 @@ html {
 
 body {
     overflow:auto;
-    background:linear-gradient(to bottom, #FFFEF1 ,  #A87D85) ;
+    /* background:linear-gradient(to bottom, #FFFEF1 ,  #A87D85) ; */
+    background-color:#ececec;
     text-align: center;
     margin: 0;
     color: var(--secondary-color);
@@ -25,21 +26,23 @@ body {
 }
 
 .logo-wrapper{
-    height:20vw;
-    width:20vw;
+    height:15vw;
+    width:15vw;
     position: absolute;
     margin:auto;
-    left:5px;
-    top:5px;
+    left:5vw;
+    top:5vw;
 }
 
 #logo{
     height:100%;
     width:100%;
-    background-image: url('/static/img/logo.png');
+    background-image: url('/static/img/tablae-logo.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 50%;
+    border: 2px solid black;
 }
 .ifuser-wrapper h3{
     position: relative;

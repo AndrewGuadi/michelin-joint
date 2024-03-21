@@ -31,7 +31,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -96,7 +95,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-
+@app.route('/')
 @app.route('/home')
 @login_required
 def home():
