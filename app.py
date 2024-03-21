@@ -113,16 +113,28 @@ def home():
 @app.route('/discover', methods=['GET'])
 @login_required
 def discover():
-    form = DiscoverForm()
+    form = DiscoverForm(request.args)
     page = request.args.get('page', 1, type=int)
     per_page = 10
-    paginated_restaurants = Restaurant.query.paginate(page=page, per_page=per_page, error_out=False)
 
-    # Check if it's an AJAX request
+    # Base query for Restaurant
+    query_conditions = Restaurant.query
+
+    # Additional query conditions can be added here if needed
+
+    # Fetch the paginated restaurants list
+    paginated_restaurants = query_conditions.paginate(page=page, per_page=per_page, error_out=False)
+
+    # Check if it's an AJAX request for infinite scroll
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return render_template('restaurant_partial.html', restaurants=paginated_restaurants.items)
-    return render_template('discover2.html', active_page='discover', restaurants=paginated_restaurants.items, pagination=paginated_restaurants, form=form)
 
+    # For regular page requests
+    return render_template('discover2.html', 
+                           restaurants=paginated_restaurants.items,
+                           total_pages=paginated_restaurants.pages, 
+                           current_page=page,
+                           form=form)
 
 @app.route('/search_results', methods=['GET'])
 @login_required
@@ -151,7 +163,6 @@ def search_results():
 
     # Fetch the filtered restaurants list before sorting by location
     filtered_restaurants = query_conditions.all()
-    
     # Sort by location if necessary
     if location:
         filtered_restaurants = [res for res in filtered_restaurants if res.longitude is not None and res.latitude is not None]
@@ -168,6 +179,7 @@ def search_results():
 
     #reset the form
     form = DiscoverForm()
+    print(len(paginated_restaurants), total_pages, page)
     return render_template('discover2.html', 
                            restaurants=paginated_restaurants, 
                            total_pages=total_pages,  # Added to handle pagination in the template
@@ -218,7 +230,7 @@ def checkin(restaurant):
         restaurant = Restaurant.query.filter_by(name=restaurant).first()
         restaurant_id = restaurant.id
         checkin = CheckIn(user_id=user_id, restaurant_id=restaurant_id)        
-        current_user.total_stars += check_stars(restaurant.distinction)
+        current_user.total_stars += restaurant.distinction
         
         try:
             db.session.add(checkin)

@@ -2,7 +2,7 @@
 <input type="hidden" id="total_pages" value="{{ total_pages }}">
 {% if restaurants %}
 
-    <div class="container">
+    <div class="container appended-data">
     {% for res in restaurants %}
         <!-- Open a new row for the first card and then every subsequent pair of cards -->
         {% if loop.index0 % 2 == 0 %}
@@ -39,7 +39,7 @@
         {% endfor %}
     </div>
 {% else %}
-<div class="container">
+<div class="container-fluid">
     <h2>There were no results found.</h2>
 </div>
 {% endif %}

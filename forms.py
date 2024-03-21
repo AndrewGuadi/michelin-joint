@@ -46,11 +46,6 @@ class DiscoverForm(FlaskForm):
     def get_style_choices(self):
         # Fetch styles from the database or any other source
         available_styles = Restaurant.query.with_entities(Restaurant.style).distinct().all()
-
-        # Print each style for debugging purposes
-        for style in available_styles:
-            print(style[0])
-
         # Format the styles into choices expected by SelectField
         choices = [('', 'Select Style')]  # Initial empty choice
         for style in available_styles:
