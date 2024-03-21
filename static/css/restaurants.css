@@ -41,3 +41,8 @@
     background-color: white;
     color:black;
 }
+
+.michelin-star {
+    height: 9vw; /* Example size, adjust as needed */
+    /* Other styling */
+}

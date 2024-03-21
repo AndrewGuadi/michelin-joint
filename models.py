@@ -61,7 +61,7 @@ class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(30), nullable=True)
     name = db.Column(db.String(100), nullable=False)
-    distinction = db.Column(db.String(15), nullable=True)
+    distinction = db.Column(db.Integer, nullable=True)
     style = db.Column(db.String(100), nullable=True)
     res_url = db.Column(db.String(120), nullable = True)
     description = db.Column(db.String(300), nullable = True)

@@ -15,8 +15,16 @@
                         <p>{{ res.url }}</p>
                         <div class="card-body">
                             <h5 class="card-title">{{ res.name }}</h5>
-                            <div class="d-flex">
-                                <p class="card-text{% if res.rank %} rank{% endif %} justify-content-start">{{ res.distinction if res.distinction else res.rank }}</p>
+                            <div>
+                                <div class="card-text justify-content-start">
+                                    {% if res.distinction %}
+                                        {% for _ in range(res.distinction) %}
+                                            <img src="{{ url_for('static', filename='img/michelinStar.png') }}" alt="Michelin Star" class="michelin-star">
+                                        {% endfor %}
+                                    {% elif res.rank %}
+                                        <p class="card-text justify-content-start rank d-flex justify-content-center align-items-center">{{ res.rank }}</p>
+                                    {% endif %}
+                                </div>
                                 <p class="card-text">{{ res.style if res.style else res.city }}</p>
                             </div>
                         </div>

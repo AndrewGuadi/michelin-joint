@@ -71,3 +71,8 @@ form{
   a{
     text-decoration: none;
 }
+
+.michelin-star {
+  height:5vw; /* Example size, adjust as needed */
+  /* Other styling */
+}

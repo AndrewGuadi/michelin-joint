@@ -28,7 +28,12 @@
         <div class="col-4">{{ res.chef }}</div>
     </div>
     <div class="row res-items">
-        <div class="col-12 mt-2">{{ res.distinction }}</div>
+        <div class="col-12 mt-2">
+            <!-- Display Michelin stars based on distinction -->
+            {% for _ in range(res.distinction) %}
+                <img src="{{ url_for('static', filename='img/michelinStar.png') }}" alt="Michelin Star" class="michelin-star">
+            {% endfor %}
+        </div>
         <div class="col-12 mt-2">{{ res.phone }}</div>
         <div class="col-12 mt-2">{{ res.location }}</div>
         <a href="{{ res.michelin_url }}" target="_blank"><div class="col-12 mt-2">{{ res.name }} Michelin Page</div></a>

@@ -15,7 +15,7 @@ if __name__=="__main__":
             r1 = Restaurant()
             r1.phone = res.get('phone')            
             r1.name = res.get('name')            
-            r1.distinction = res.get('distinction')            
+            r1.distinction = int(res.get('distinction')[0])            
             r1.style = res.get('style')            
             r1.res_url = res.get('url')            
             r1.description = res.get('description')            
