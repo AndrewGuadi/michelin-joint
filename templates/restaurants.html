@@ -25,7 +25,15 @@
     <div class="row primary-res-items pt-2">
         <div class="col-4">{{ res.name }}</div>
         <div class="col-4">{{ res.style }}</div>
-        <div class="col-4">{{ res.chef }}</div>
+        <div class="col-4 chefs">
+            {% if res.chefs %}
+                {% for chef in res.chefs %}
+                    <a href="{{ url_for('chefProfile', chef=chef.name) }}">
+                        <div>{{ chef.name }}</div>
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
     <div class="row res-items">
         <div class="col-12 mt-2">

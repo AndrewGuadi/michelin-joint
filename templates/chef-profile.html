@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+
+{% block title %} Chef Profile - {{ chef.name }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chef-profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container chef-profile">
+    <div class="row mt-4">
+        <!--left side-->
+        <div class="col-6 justify-content-center">
+            <div class="profile-img"></div>
+            <div class="chef-name">{{ chef.name }}</div>
+            <div class="current-restaurants">
+                {% for restaurant in chef.restaurants %}
+                <a href="{{ url_for('restaurants', restaurant_name=restaurant.name) }}">
+                    <p>{{ restaurant.name }}</p>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="related-restaurants-button">RELATED RESTAURANTS</div>
+        </div>
+        <!--Right side-->
+        <div class="col-6 mt-3">
+            <div>I think that this would be better if it were a shorter form text</div>
+            <div class="follow-button mt-4">Follow</div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 description">{{ chef.bio }}</div>
+    </div>
+    <div class="row break-line my-5"></div>
+    <div class="row">
+        <div class="col-12">This will be the Chefs feed</div>
+    </div>
+</div>
+
+{% endblock %}

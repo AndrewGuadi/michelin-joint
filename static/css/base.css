@@ -26,11 +26,10 @@ body {
 }
 
 .logo-wrapper{
-    height:15vw;
-    width:15vw;
+    height:25vw;
+    width:25vw;
     position: absolute;
     margin:auto;
-    left:5vw;
     top:5vw;
 }
 
@@ -42,7 +41,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
-    border: 2px solid black;
+    
 }
 .ifuser-wrapper h3{
     position: relative;

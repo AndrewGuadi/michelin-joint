@@ -1,0 +1,53 @@
+
+.row{
+    position: relative;
+    margin:auto;
+}
+.profile-img{
+    position:relative;
+    margin:auto;
+    background-image: url("/static/img/profile-fill.jpg");
+    background-size: contain;
+    height:30vw;
+    width:30vw;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.chef-name{
+    position: relative;
+}
+
+.current-restaurant{
+    font-size:4vw;
+    font-weight: 700;
+    position: relative;
+}
+
+.related-restaurants-button{
+    color:white;
+    background-color:var(--secondary-color)
+}
+
+.description{
+    padding:5px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    position: relative;
+    font-size:smaller;
+}
+
+.follow-button{
+    color:red;
+    font-size: 16px;
+    font-weight:700;
+    position: relative;
+}
+
+.break-line{
+    position: relative;
+    margin: auto;
+    border: 1px solid black;
+    height:0;
+    width:85%;
+}

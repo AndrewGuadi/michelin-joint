@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 #import the tables
-from models import User, Restaurant, CheckIn, Friendship
+from models import User, Restaurant, CheckIn, Friendship, Chef, Follow
 
 app.config['SECRET_KEY'] = "TEST_KEY_NEEDS_CHANGED"
 
@@ -228,6 +228,14 @@ def restaurants(restaurant_name):
         return render_template('error.html', message="Restaurant not found"), 404
     return render_template('restaurants.html', res=restaurant, checkins=checkins)
 
+
+@app.route('/chef-profile/<chef>')
+@login_required
+def chefProfile(chef):
+
+    chef = Chef.query.filter_by(name=chef).first()
+
+    return render_template('chef-profile.html', chef=chef)
 
 
 @app.route('/checkin/<restaurant>', methods=['POST'])

@@ -56,6 +56,36 @@ class CheckIn(db.Model):
 
 
 
+chef_restaurant_association = db.Table('chef_restaurant',
+    db.Column('chef_id', db.Integer, db.ForeignKey('chef.id'), primary_key=True),
+    db.Column('restaurant_id', db.Integer, db.ForeignKey('restaurant.id'), primary_key=True)
+)
+
+
+
+class Chef(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    bio = db.Column(db.Text)
+    profile_picture = db.Column(db.String(255), nullable=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Many-to-many relationship with restaurants
+     # Define the relationship with Restaurant
+    restaurants = db.relationship(
+        'Restaurant', 
+        secondary=chef_restaurant_association, 
+        lazy='dynamic',
+        back_populates='chefs',  # Use back_populates here
+    )
+    # contents = db.relationship('Content', primaryjoin="and_(Content.associated_id==Chef.id, "
+    #                                                   "Content.associated_type=='chef')",
+    #                            backref='chef')
+
+    def __repr__(self):
+        return f'<Chef {self.name}>'
+
+
 # Restaurant model
 class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,7 +101,14 @@ class Restaurant(db.Model):
     image_url = db.Column(db.String(120), nullable = True)
     michelin_url = db.Column(db.String(120), nullable=True)
     check_ins = db.relationship('CheckIn', backref='restaurant', lazy=True)
-    
+     # Define the relationship with Chef
+    chefs = db.relationship(
+        'Chef', 
+        secondary=chef_restaurant_association, 
+        back_populates='restaurants',  # Use back_populates here
+    )
+
+
     # contents = db.relationship('Content', primaryjoin="and_(Content.associated_id==Restaurant.id, "
     #                                                   "Content.associated_type=='restaurant')",
     #                            backref='restaurant')
@@ -89,37 +126,14 @@ class Restaurant(db.Model):
        ##     ########    ###        ##
 ############################################################################
     
-# class Follow(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     follower_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     followed_id = db.Column(db.Integer)
-#     followed_type = db.Column(db.String)  # 'user', 'chef', 'restaurant'
-#     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+class Follow(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    followed_id = db.Column(db.Integer)
+    followed_type = db.Column(db.String)  # 'user', 'chef', 'restaurant'
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     follower = db.relationship('User', backref='following')
-
-
-
-# chef_restaurant_association = db.Table('chef_restaurant',
-#     db.Column('chef_id', db.Integer, db.ForeignKey('chef.id'), primary_key=True),
-#     db.Column('restaurant_id', db.Integer, db.ForeignKey('restaurant.id'), primary_key=True)
-# )
-
-# class Chef(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     bio = db.Column(db.Text)
-#     profile_picture = db.Column(db.String(255))
-#     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-
-#     # Many-to-many relationship with restaurants
-#     restaurants = db.relationship('Restaurant', secondary=chef_restaurant_association, backref=db.backref('chefs', lazy='dynamic'))
-#     contents = db.relationship('Content', primaryjoin="and_(Content.associated_id==Chef.id, "
-#                                                       "Content.associated_type=='chef')",
-#                                backref='chef')
-
-#     def __repr__(self):
-#         return f'<Chef {self.name}>'
+    follower = db.relationship('User', backref='following')
 
 
 # class Content(db.Model):
