@@ -17,7 +17,7 @@ html {
 body {
     overflow:auto;
     /* background:linear-gradient(to bottom, #FFFEF1 ,  #A87D85) ; */
-    background-color:#ececec;
+    background-color:#ffffff;
     text-align: center;
     margin: 0;
     color: var(--secondary-color);
@@ -59,8 +59,8 @@ body {
   }
   
 .navbar .nav-item .nav-link {
-    background-color: var(--main-color);
-    border: 1px solid var(--secondary-color);
+    background-color: #2a4bc5;
+    border: 1px solid white;
     color: rgb(0, 0, 0); /* Text color for the nav items */
     border-radius:0px;
     }
@@ -68,9 +68,8 @@ body {
 .navbar .nav-item .nav-link.active {
     border: 1px solid black;
     font-weight:700;
-    color:white;
-    background-color:var(--main-color); /* Highlight color for the active tab */
-    border-radius: 5px; /* Rounded corners for the active tab */
+    color:rgb(255, 255, 255);
+    background-color: var(--secondary-color);
     }
 
 .justify-content-center{

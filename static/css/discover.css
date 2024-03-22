@@ -76,3 +76,16 @@ form{
   height:5vw; /* Example size, adjust as needed */
   /* Other styling */
 }
+
+
+.form-group {
+  margin: 1em 0;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+.form-group label {
+  display: inline-block; /* Or any other styling as per your design */
+}

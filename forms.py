@@ -1,6 +1,6 @@
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, SelectField, RadioField
+from wtforms import StringField, SubmitField, PasswordField, SelectField, RadioField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from models import Restaurant
 
@@ -24,7 +24,7 @@ class CreateAccount(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder': 'Email', 'autocomplete': 'off'})
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=32)], render_kw={'placeholder': 'Password'})
     password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={'placeholder': 'Confirm Password'})
-    
+
     submit = SubmitField('Create Account', render_kw={'placeholder': 'Create Account', 'class': 'btn btn-primary'})
 
     # def generate_csrf_token(self, csrf_context):

@@ -1,0 +1,53 @@
+
+
+
+.profile-image{
+    position: relative;
+    margin: auto;
+    background-image: url('/static/img/profile.jpg');
+    background-position: center;
+    background-size: cover;
+    height:30vw;
+    width:30vw;
+    border-radius: 50%;
+}
+
+.username{
+    font-weight: 700;
+}
+
+.profile-starcount h3{
+    font-size: 8vw;
+    font-weight:700;
+}
+
+.profile-starcount h6{
+    color:red;
+    font-size:7vw;
+    font-weight:600;
+}
+
+.profile-quote{
+    font-size: 3vw;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#checkin{
+    position: relative;
+    margin:auto;
+    border-radius: 35px;
+    padding:2vw;
+    width: 80%;
+    height: 100%;
+    background-color: black;
+    color:white;
+    font-weight: 700;
+}
+
+.break-line{
+    position: relative;
+    margin:auto;
+    border: 1px solid black;
+    height:0px;
+    width:85%;
+}

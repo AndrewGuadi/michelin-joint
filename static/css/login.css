@@ -78,6 +78,7 @@ body{
     margin:0;
 }
 
+
 .login-form button{
     color: white;
     margin-top:5px;
@@ -112,4 +113,16 @@ body{
 
 .search{
     background-image: url('../img/search.jpg')
+}
+
+
+.checkbox-container{
+    display: grid;
+    justify-content: start;
+}
+
+#privacy_policy{
+    display: flex;
+    position: relative;
+    width:5vw;
 }

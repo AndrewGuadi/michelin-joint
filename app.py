@@ -50,6 +50,13 @@ def login():
     return render_template('login.html', login_form=login_form)
 
 
+@app.route('/privacy-policy')
+def privacy_policy():
+
+    with open('static/data/privacy-policy.txt', 'r', encoding='utf-8') as file:
+        privacy = file.read()
+
+    return render_template('privacy-policy.html', privacy=privacy)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -107,7 +114,7 @@ def home():
     if not checkins:
         # Handle case where there are no check-ins for the user
         flash("No check-ins available for this user.", "info")
-    return render_template('index.html', checkins=checkins, user=current_user, active_page='home')
+    return render_template('user-profile.html', checkins=checkins, user=current_user, active_page='home')
 
 
 @app.route('/discover', methods=['GET'])
@@ -134,7 +141,8 @@ def discover():
                            restaurants=paginated_restaurants.items,
                            total_pages=paginated_restaurants.pages, 
                            current_page=page,
-                           form=form)
+                           form=form, active_page='discover')
+
 
 @app.route('/search_results', methods=['GET'])
 @login_required
@@ -184,7 +192,7 @@ def search_results():
                            restaurants=paginated_restaurants, 
                            total_pages=total_pages,  # Added to handle pagination in the template
                            current_page=page,
-                           form=form)
+                           form=form, active_page='discover')
 
 
 

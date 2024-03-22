@@ -51,6 +51,13 @@
 
                         <p class="visually-hidden">{{ create_account_form.password2.label }}</p>
                         {{ create_account_form.password2() }}
+                        
+                        <!-- Privacy Policy Checkbox -->
+                        <!-- Privacy Policy Checkbox -->
+                        <div class="form-group checkbox-container">
+                            <input type="checkbox" id="privacy_policy" name="privacy_policy" required>
+                            <label for="privacy_policy">I agree to the <a href="{{ url_for('privacy_policy') }}" target="_blank">Privacy Policy</a>.</label>
+                        </div>
 
                         <p>{{ create_account_form.submit() }}</p>
 

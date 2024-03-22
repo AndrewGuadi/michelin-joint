@@ -1,0 +1,32 @@
+Last Updated: [Date]
+
+Introduction
+At Tablae, your privacy and data security are of utmost importance to us. This privacy policy sets forth how we handle the information you provide while using our services at www.tablae.com.
+
+1. Information We Collect
+
+Account Information: When you create an account on Tablae, we collect your username, email address, and an encrypted password.
+Usage Data: We may gather data on how you use our services to continually improve our platform and enhance user experience.
+2. How We Use Your Information
+
+Service Provision: Your information is used to set up your account, enable secure login, and deliver our services.
+Improvement and Updates: We utilize usage data to improve our services and inform you of significant updates or changes.
+Communication: Your email address may be used to send important notices about your account or our services.
+3. Data Storage and Security
+
+Safekeeping of Your Data: All personal data is securely stored in our database system.
+Security Measures: We implement robust measures like SHA-256 encryption for password security to protect your information from unauthorized access or breaches.
+Restricted Access: Only authorized Tablae personnel have access to your personal data.
+4. Sharing of Information
+
+Third Parties: We do not share your personal information with third parties for their commercial purposes.
+5. Your Privacy Rights
+
+Access and Management: You can access, update, or delete your account information at any time through your Tablae account settings.
+Communication Preferences: You have the option to opt out of receiving non-critical communications from us.
+6. Policy Changes
+
+Updates to the Policy: We may update this privacy policy periodically. All changes will be posted on our website, and we will provide a more noticeable notification for substantial updates.
+7. Contact Information
+
+Inquiries and Concerns: If you have any questions or concerns about our privacy practices, please reach out to us at [Your Contact Email/Phone].
