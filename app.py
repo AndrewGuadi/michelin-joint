@@ -37,7 +37,7 @@ def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         #add all the user creation and validation
-        user = User.query.filter_by(username = login_form.username.data.strip()).first()
+        user = User.query.filter_by(username = login_form.username.data.lower().strip()).first()
         print(login_form.password.data)
         if user and user.check_password(login_form.password.data.strip()):
             print('Found')
@@ -64,16 +64,16 @@ def register():
     if create_form.validate_on_submit():
         # Check if the username or email already exists
         existing_user = User.query.filter(
-            (User.username == create_form.username.data.strip()) |
-            (User.email == create_form.email.data.strip())
+            (User.username == create_form.username.data.lower().strip()) |
+            (User.email == create_form.email.data.lower().strip())
         ).first()
 
         if existing_user:
             flash('Username or Email already exists', 'error')
             return render_template('register.html', create_account_form=create_form)
 
-        user = User(username=create_form.username.data, email=create_form.email.data)
-        user.set_password(create_form.password.data)
+        user = User(username=create_form.username.data.lower().strip(), email=create_form.email.data.lower().strip())
+        user.set_password(create_form.password.data.strip())
         
         try:
             db.session.add(user)

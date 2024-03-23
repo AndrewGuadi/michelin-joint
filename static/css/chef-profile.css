@@ -6,7 +6,7 @@
 .profile-img{
     position:relative;
     margin:auto;
-    background-image: url("/static/img/profile-fill.jpg");
+    
     background-size: contain;
     height:30vw;
     width:30vw;
