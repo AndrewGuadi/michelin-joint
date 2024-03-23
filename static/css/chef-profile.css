@@ -7,7 +7,9 @@
     position:relative;
     margin:auto;
     
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     height:30vw;
     width:30vw;
     border: 2px solid black;

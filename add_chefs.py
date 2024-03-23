@@ -10,7 +10,7 @@ if __name__ == "__main__":
     with app.app_context():
         for chef_data in chefs:
             if chef_data.get('chef'):
-                new_chef = Chef(name=chef_data.get('chef'), bio=chef_data.get('blurb'))
+                new_chef = Chef(name=chef_data.get('chef'), bio=chef_data.get('blurb'), profile_picture=chef_data.get('image_url'))
                 db.session.add(new_chef)  # Add new_chef to the session here
                 print(new_chef)
                 for restaurant_name in chef_data.get('current_restaurant', []):
