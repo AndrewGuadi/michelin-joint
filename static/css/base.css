@@ -26,11 +26,14 @@ body {
 }
 
 .logo-wrapper{
-    height:25vw;
-    width:25vw;
+    height:20vw;
+    width:20vw;
     position: absolute;
     margin:auto;
-    top:5vw;
+    left:5vw;
+    top:3vw;
+    border-radius: 40%;
+    border:2px solid black;
 }
 
 #logo{
