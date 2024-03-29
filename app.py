@@ -295,7 +295,7 @@ def restaurants(restaurant_name):
         followed_id=restaurant.id,
         followed_type='restaurant'
     ).first() is not None
-    return render_template('restaurants.html', res=restaurant, checkins=checkins, is_following=is_following)
+    return render_template('restaurants-v2.html', res=restaurant, checkins=checkins, is_following=is_following)
 
 
 @app.route('/chef-profile/<chef>')

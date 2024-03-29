@@ -143,6 +143,7 @@ class Content(db.Model):
     content_type = db.Column(db.String(50))  # e.g., 'article', 'video'
     url = db.Column(db.String(255))  # URL to the content
     image_url = db.Column(db.String(255))
+    # associated_name = db.Column(db.String(50))
     associated_id = db.Column(db.Integer)
     associated_type = db.Column(db.String)  # e.g., 'restaurant', 'chef'
     timestamp = db.Column(db.DateTime, default=datetime.now(timezone.utc))
@@ -154,6 +155,7 @@ class Content(db.Model):
             'title': self.title,
             'image_url':self.image_url,
             "url":self.url,
+            #'name':self.associated_name
         }
     
     def __repr__(self):

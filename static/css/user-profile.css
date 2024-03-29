@@ -77,10 +77,16 @@
     overflow: hidden;
 }
 
-.custom-card-title {
-    white-space: nowrap;
+.card-text {
+    margin: 0; /* Removes default margins */
+    font-weight: 700;
+    font-size: 1em; /* Adjust text size as needed */
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Number of lines you want to display before truncating */
     margin-bottom: 0;
 }
+
+
 
