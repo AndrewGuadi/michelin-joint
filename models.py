@@ -143,7 +143,6 @@ class Follow(db.Model):
 #     content_type = db.Column(db.String(50))  # e.g., 'article', 'video'
 #     url = db.Column(db.String(255))  # URL to the content
 #     description = db.Column(db.Text)
-#     published_date = db.Column(db.DateTime)
 #     associated_id = db.Column(db.Integer)
 #     associated_type = db.Column(db.String)  # e.g., 'restaurant', 'chef'
 #     timestamp = db.Column(db.DateTime, default=datetime.utcnow)

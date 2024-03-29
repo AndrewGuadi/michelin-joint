@@ -294,9 +294,6 @@ def checkin(restaurant):
     return redirect(url_for('restaurants', restaurant_name=restaurant.name))
 
 
-#############################################################################
-
-
 
 @app.route('/follow_unfollow/<int:entity_id>/<entity_type>', methods=['POST'])
 @login_required
@@ -324,6 +321,28 @@ def follow_unfollow(entity_id, entity_type):
     return redirect(request.referrer or url_for('home'))
 
 
+
+
+
+
+#########################################
+# def get_user_related_content(user_id):
+#     # Get followed entities
+#     followed_chefs, followed_restaurants = get_followed_entities(user_id)
+
+#     related_content = []
+
+#     # Get content related to followed chefs
+#     for chef in followed_chefs:
+#         chef_content = Content.query.filter_by(associated_id=chef.id, associated_type='chef').all()
+#         related_content.extend(chef_content)
+
+#     # Get content related to followed restaurants
+#     for restaurant in followed_restaurants:
+#         restaurant_content = Content.query.filter_by(associated_id=restaurant.id, associated_type='restaurant').all()
+#         related_content.extend(restaurant_content)
+
+#     return related_content
 
 if __name__ == '__main__':
     app.run(debug=True)
