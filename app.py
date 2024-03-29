@@ -171,6 +171,13 @@ def get_content(page):
     return jsonify([item.to_dict() for item in content_items])
     
 
+@app.route('/chef-content/<int:chef_id>/<int:page>')
+def chef_content(chef_id, page):
+    per_page = 10  # Number of items per page
+    chef_content = Content.query.filter_by(associated_id=chef_id, associated_type='chef').paginate(page=page, per_page=per_page, error_out=False)
+    content_items = [item.to_dict() for item in chef_content.items]  # Convert each item to a dictionary
+    return jsonify(content_items)
+
 
 @app.route('/discover', methods=['GET'])
 @login_required

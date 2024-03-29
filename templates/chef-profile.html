@@ -28,7 +28,7 @@
             <div class="current-restaurants">
                 {% for restaurant in chef.restaurants %}
                 <a href="{{ url_for('restaurants', restaurant_name=restaurant.name) }}">
-                    <p>{{ restaurant.name }}</p>
+                    <p class="mt-0 mb-0">{{ restaurant.name }}</p>
                 </a>
                 {% endfor %}
             </div>
@@ -50,8 +50,11 @@
         <div class="col-12 description">{{ details.bio }}</div>
     </div>
     <div class="row break-line my-5"></div>
-    <div class="row">
-        <div class="col-12">This will be the Chefs feed</div>
+    <!-- Chef's Feed Section -->
+    <div id="chefContentLoader" class="horizontal-scroll-container" data-chef-id="{{ chef.id }}">
+        <!-- Dynamically loaded content will be inserted here -->
+        <div id="chefContent" class="chef-content-container"></div>
+
     </div>
     <div class="row break-line my-5"></div>
 
@@ -76,4 +79,56 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const chefContentLoader = document.getElementById('chefContentLoader');
+    const chefId = chefContentLoader.getAttribute('data-chef-id'); // Get chef id from data attribute
+    let page = 1; // Example page number, adjust as necessary
+
+    function loadChefContent(page, chefId) {
+        // AJAX request to get chef content
+        $.ajax({
+            url: `/chef-content/${chefId}/${page}`,
+            method: 'GET',
+            success: function(response) {
+                console.log(response)
+                displayChefContent(response);
+            },
+            error: function(error) {
+                console.log("Error loading chef content:", error);
+            }
+        });
+    }
+
+    function displayChefContent(content) {
+        const contentContainer = document.getElementById('chefContent'); // Element to hold the content
+        contentContainer.innerHTML = ''; // Clear existing content
+
+        content.forEach(function(item) {
+            const fallbackImageUrl = '/static/img/media.jpg'; // Path to your fallback image
+            let contentHtml = `
+                <a href="${item.url}" class="card custom-card text-decoration-none" target="_blank">
+                    <img src="${item.image_url}" onerror="this.onerror=null;this.src='${fallbackImageUrl}'" class="card-img-top custom-card-img" alt="${item.title}">
+                    <div class="card-body custom-card-body">
+                        <p class="card-text">${item.title}</p>
+                    </div>
+                </a>
+            `;
+            contentContainer.insertAdjacentHTML('beforeend', contentHtml);
+        });
+    }
+
+    // Initial load
+    loadChefContent(page, chefId);
+});
+</script>
 {% endblock %}

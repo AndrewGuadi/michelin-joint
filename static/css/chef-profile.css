@@ -53,3 +53,35 @@
     height:0;
     width:85%;
 }
+
+
+.chef-content-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.card.custom-card {
+    flex: 0 0 auto; /* This ensures that cards don't grow or shrink but remain flexible */
+    width: 30%; /* Adjust this value based on your preferred maximum width */
+    margin-right: 15px; /* Spacing between cards */
+    background-color: #fff; /* Card background color */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Adds a subtle shadow for depth */
+    border-radius: 5px; /* Rounds the corners of the card */
+    overflow: hidden; /* Ensures nothing spills out of the card's border-radius */
+}
+
+.card-img-top.custom-card-img {
+    width: 100%; /* Makes the image take the full width of the card */
+    height: auto; /* Keeps the image aspect ratio intact */
+    object-fit: cover; /* Ensures the image covers the area nicely */
+}
+
+.card-body.custom-card-body {
+    padding: 10px; /* Padding inside the card */
+}
+
+.card-text {
+    margin: 0; /* Removes default margins */
+    font-size: 1em; /* Adjust text size as needed */
+}
