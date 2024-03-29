@@ -7,6 +7,9 @@ from helpers import read_json, check_stars
 from location_helpers import haversine, get_coordinates
 import os
 import json
+import random 
+
+
 
 app = Flask(__name__)
 
@@ -158,11 +161,13 @@ def home():
         flash("No check-ins available for this user.", "info")
     return render_template('user-profile.html', checkins=checkins, user=current_user, active_page='home')
 
+
 @app.route('/get-content/<int:page>')
 def get_content(page):
     user_id = current_user.id
     # Assuming you have a function to fetch content based on the page number
     content_items = get_user_related_content(user_id=user_id)
+    random.shuffle(content_items)
     return jsonify([item.to_dict() for item in content_items])
     
 
