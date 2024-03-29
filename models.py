@@ -137,18 +137,18 @@ class Follow(db.Model):
     follower = db.relationship('User', backref='following')
 
 
-# class Content(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(255))
-#     content_type = db.Column(db.String(50))  # e.g., 'article', 'video'
-#     url = db.Column(db.String(255))  # URL to the content
-#     description = db.Column(db.Text)
-#     associated_id = db.Column(db.Integer)
-#     associated_type = db.Column(db.String)  # e.g., 'restaurant', 'chef'
-#     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+class Content(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
+    content_type = db.Column(db.String(50))  # e.g., 'article', 'video'
+    url = db.Column(db.String(255))  # URL to the content
+    # description = db.Column(db.Text)
+    associated_id = db.Column(db.Integer)
+    associated_type = db.Column(db.String)  # e.g., 'restaurant', 'chef'
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     def __repr__(self):
-#         return f'<Content {self.title}>'
+    def __repr__(self):
+        return f'<Content {self.title}>'
     
 
 # def TopRestaurants(db.model):
