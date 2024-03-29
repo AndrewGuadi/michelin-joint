@@ -11,16 +11,20 @@
 {% block content %}
 <!-- Flash messages -->
 <div class="container mt-3">
-    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
-    {% endwith %}
 </div>
 
-<div class="res-image w-100" style="background-image: url('{{ res.image_url }}');"></div>
+<div class="res-image w-100" style="background-image: url('{{ res.image_url }}');"></div><form action="{{ url_for('follow_unfollow', entity_id=res.id, entity_type='restaurant') }}" method="POST" class="mt-5 mb-2 col-12 d-flex justify-content-center">
+    {% if is_following %}
+        <button type="submit" class="follow-button mt-4 btn btn-primary">Unfollow</button>
+    {% else %}
+        <button type="submit" class="follow-button mt-4 btn btn-primary">Follow</button>
+    {% endif %}
+</form>
 <div class="container-fluid">
     <div class="row primary-res-items pt-2">
         <div class="col-4">{{ res.name }}</div>

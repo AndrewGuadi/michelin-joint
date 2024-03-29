@@ -28,7 +28,6 @@
                         {{ login_form.hidden_tag() }}
                         
                         <!--Flashed in message to appear right over the log in page-->
-                        {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                                 {% for category, message in messages %}
                                     <div class="alert alert-{{ category }}">
@@ -36,7 +35,6 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
-                        {% endwith %}
 
                         <p class="visually-hidden">{{ login_form.username.label }}</p>
                         {{ login_form.username(placeholder="Username") }}

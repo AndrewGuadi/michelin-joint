@@ -11,6 +11,11 @@
 <div class="container chef-profile">
     <div class="row mt-4">
         <!--left side-->
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
         <div class="col-6 justify-content-center">
             {% if chef.profile_picture %}
                 <div class="profile-img" style="background-image: url('{{ chef.profile_picture }}');"></div>
@@ -30,11 +35,17 @@
         <!--Right side-->
         <div class="col-6 mt-3">
             <div>I think that this would be better if it were a shorter form text</div>
-            <div class="follow-button mt-4">Follow</div>
+            <form action="{{ url_for('follow_unfollow', entity_id=chef.id, entity_type='chef') }}" method="POST" class="mt-5 mb-2 col-12 d-flex justify-content-center">
+                {% if is_following %}
+                    <button type="submit" class="follow-button mt-4">Unfollow</button>
+                {% else %}
+                    <button type="submit" class="follow-button mt-4">Follow</button>
+                {% endif %}
+            </form>
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-12 description">{{ chef.bio }}</div>
+        <div class="col-12 description">{{ details.bio }}</div>
     </div>
     <div class="row break-line my-5"></div>
     <div class="row">
@@ -43,18 +54,23 @@
     <div class="row break-line my-5"></div>
 
     <!--this will be the more detailed chef profile-->
-    <div class="row justify-content-center">
-        <h3 class="details col-10">Early Career & Culinary Education</h3>
-        <p class="col-10">This is where all the career detail text will go</p>
+    <div class="row justify-content-center" style="text-align: start;">
+        <strong><h5 class="details col-10">Early Career & Culinary Education</h5></strong>
+        <p class="col-12">{{ details.early_career }}</p>
 
-        <h3 class="details col-10">Achievements and Awards</h3>
-        <p class="col-10">This is where all the awards will go</p>
+        <strong><h5 class="details col-10">Achievements and Awards</h5></strong>
+        <p class="col-12">{{ details.career_milestones }}</p>
 
-        <h3 class="details col-10">Culinary Philosophy and Style</h3>
-        <p class="col-10">This is where all the details regrading the culinary style will go</p>
+        <strong><h5 class="details col-10">Culinary Philosophy and Style</h5></strong>
+        <p class="col-12">{{ details.cooking_philosophy }}</p>
+        <p class="col-12">{{ details.culinary_style }}</p>
 
-        <h3 class="details col-10">Charities and Community Projects</h3>
-        <p class="col-10">This is where all the charitable organizations data will go</p>
+        <strong><h5 class="details col-10">Charities and Community Projects</h5></strong>
+        {% if details.charity_projects %}
+            <p class="col-12">{{ details.charity_projects }}</p>
+        {% else %}
+            <p class="col-12">We are not aware of any Charity Projects at the moment. We update daily so keep checking back for the most up-to-date information.</p>
+        {% endif %}
     </div>
 </div>
 

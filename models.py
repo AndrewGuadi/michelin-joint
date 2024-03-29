@@ -69,6 +69,7 @@ class Chef(db.Model):
     bio = db.Column(db.Text)
     profile_picture = db.Column(db.String(255), nullable=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    details = db.Column(db.Text) 
 
     # Many-to-many relationship with restaurants
      # Define the relationship with Restaurant

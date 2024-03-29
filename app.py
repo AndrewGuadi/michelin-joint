@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response
 from forms import LoginForm, CreateAccount, DiscoverForm
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from extensions import db
@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from helpers import read_json, check_stars
 from location_helpers import haversine, get_coordinates
 import os
+import json
 
 app = Flask(__name__)
 
@@ -29,6 +30,24 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+def get_followed_entities(user_id):
+    followed_entities = Follow.query.filter_by(follower_id=user_id).all()
+    
+    followed_chefs = []
+    followed_restaurants = []
+
+    for entity in followed_entities:
+        if entity.followed_type == 'chef':
+            chef = Chef.query.get(entity.followed_id)
+            if chef:
+                followed_chefs.append(chef)
+        elif entity.followed_type == 'restaurant':
+            restaurant = Restaurant.query.get(entity.followed_id)
+            if restaurant:
+                followed_restaurants.append(restaurant)
+
+    return followed_chefs, followed_restaurants
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -57,6 +76,8 @@ def privacy_policy():
         privacy = file.read()
 
     return render_template('privacy-policy.html', privacy=privacy)
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -111,10 +132,11 @@ def home():
     
     # Query to get all check-ins for the specific user along with associated restaurant data
     checkins = CheckIn.query.filter_by(user_id=user_id).all()
+    chefs, restaurants = get_followed_entities(user_id=user_id)
     if not checkins:
         # Handle case where there are no check-ins for the user
         flash("No check-ins available for this user.", "info")
-    return render_template('user-profile.html', checkins=checkins, user=current_user, active_page='home')
+    return render_template('user-profile.html', checkins=checkins, user=current_user, chefs=chefs, active_page='home')
 
 
 @app.route('/discover', methods=['GET'])
@@ -226,7 +248,14 @@ def restaurants(restaurant_name):
     if not restaurant:
         # Handle case where restaurant is not found
         return render_template('error.html', message="Restaurant not found"), 404
-    return render_template('restaurants.html', res=restaurant, checkins=checkins)
+    
+    # Check if current user is following the chef
+    is_following = Follow.query.filter_by(
+        follower_id=current_user.id,
+        followed_id=restaurant.id,
+        followed_type='restaurant'
+    ).first() is not None
+    return render_template('restaurants.html', res=restaurant, checkins=checkins, is_following=is_following)
 
 
 @app.route('/chef-profile/<chef>')
@@ -234,8 +263,15 @@ def restaurants(restaurant_name):
 def chefProfile(chef):
 
     chef = Chef.query.filter_by(name=chef).first()
+    details = json.loads(chef.details)
 
-    return render_template('chef-profile.html', chef=chef)
+    # Check if current user is following the chef
+    is_following = Follow.query.filter_by(
+        follower_id=current_user.id,
+        followed_id=chef.id,
+        followed_type='chef'
+    ).first() is not None
+    return render_template('chef-profile.html', chef=chef, details=details, is_following=is_following)
 
 
 @app.route('/checkin/<restaurant>', methods=['POST'])
@@ -256,6 +292,37 @@ def checkin(restaurant):
             db.session.rollback()
         
     return redirect(url_for('restaurants', restaurant_name=restaurant.name))
+
+
+#############################################################################
+
+
+
+@app.route('/follow_unfollow/<int:entity_id>/<entity_type>', methods=['POST'])
+@login_required
+def follow_unfollow(entity_id, entity_type):
+    user_id = current_user.id  # ID of the user
+    existing_follow = Follow.query.filter_by(
+        follower_id=user_id, 
+        followed_id=entity_id, 
+        followed_type=entity_type
+    ).first()
+
+    if existing_follow:
+        # Unfollow
+        db.session.delete(existing_follow)
+        db.session.commit()
+        flash(f'You have unfollowed this {entity_type}', 'info')
+    else:
+        # Follow
+        new_follow = Follow(follower_id=user_id, followed_id=entity_id, followed_type=entity_type)
+        db.session.add(new_follow)
+        db.session.commit()
+        flash(f'You are now following this {entity_type}', 'success')
+
+    # Redirect back to the referring page
+    return redirect(request.referrer or url_for('home'))
+
 
 
 if __name__ == '__main__':

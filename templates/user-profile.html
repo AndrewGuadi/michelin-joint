@@ -40,7 +40,10 @@
 <!-- User Feed -->
 <div class="container mt-4">
     <div class="row">
-        <div class="w-75 col-12">This is the user feed</div>
+        <div class="w-75 col-12">{% for chef in chefs %}
+                                    {{ chef.name }}
+                                {% endfor %}                     
+        </div>
     </div>
 </div>
 {% endblock %}
