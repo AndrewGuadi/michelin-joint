@@ -77,9 +77,10 @@ $(function() {
                 console.log("calling function")
                 // Append new content to the container
                 $.each(data, function(i, item) {
+                    let fallbackImageUrl = 'static/img/media.jpg';
                     $('#content-container').append(
                         '<a href="' + item.url + '" class="card custom-card text-decoration-none" target="_blank">' +
-                            '<img src="' + item.image_url + '" class="card-img-top custom-card-img" alt="' + item.title + '">' +
+                            '<img src="' + item.image_url + '" onerror="this.onerror=null; this.src=\'' + fallbackImageUrl + '\'" class="card-img-top custom-card-img" alt="' + item.title + '">' +
                             '<div class="card-body custom-card-body">' +
                                 '<p class="card-text">' + item.title + '</p>' +
                             '</div>' +
