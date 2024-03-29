@@ -63,7 +63,7 @@
 
 .card.custom-card {
     flex: 0 0 auto; /* This ensures that cards don't grow or shrink but remain flexible */
-    width: 30%; /* Adjust this value based on your preferred maximum width */
+    width: 50%; /* Adjust this value based on your preferred maximum width */
     margin-right: 15px; /* Spacing between cards */
     background-color: #fff; /* Card background color */
     box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Adds a subtle shadow for depth */
@@ -84,4 +84,8 @@
 .card-text {
     margin: 0; /* Removes default margins */
     font-size: 1em; /* Adjust text size as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
 }
