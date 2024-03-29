@@ -132,7 +132,7 @@ class Follow(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     followed_id = db.Column(db.Integer)
     followed_type = db.Column(db.String)  # 'user', 'chef', 'restaurant'
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     follower = db.relationship('User', backref='following')
 
@@ -142,11 +142,20 @@ class Content(db.Model):
     title = db.Column(db.String(255))
     content_type = db.Column(db.String(50))  # e.g., 'article', 'video'
     url = db.Column(db.String(255))  # URL to the content
-    # description = db.Column(db.Text)
+    image_url = db.Column(db.String(255))
     associated_id = db.Column(db.Integer)
     associated_type = db.Column(db.String)  # e.g., 'restaurant', 'chef'
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'image_url':self.image_url,
+            "url":self.url,
+        }
+    
     def __repr__(self):
         return f'<Content {self.title}>'
     

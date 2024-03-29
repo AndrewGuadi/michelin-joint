@@ -51,3 +51,36 @@
     height:0px;
     width:85%;
 }
+
+/* New code */
+
+#content-container {
+    width:100%;
+    /* Adjust as needed */
+    max-height: 55vw;
+    overflow-x: auto;
+}
+.custom-card {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    margin: 0.5rem;
+}
+
+.custom-card-img {
+    height: 35vw;
+    object-fit: cover;
+}
+
+.custom-card-body {
+    height: 15vw;
+    overflow: hidden;
+}
+
+.custom-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+}
+

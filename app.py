@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response
+from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response, jsonify
 from forms import LoginForm, CreateAccount, DiscoverForm
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from extensions import db
@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 #import the tables
-from models import User, Restaurant, CheckIn, Friendship, Chef, Follow
+from models import User, Restaurant, CheckIn, Friendship, Chef, Follow, Content
 
 app.config['SECRET_KEY'] = "TEST_KEY_NEEDS_CHANGED"
 
@@ -48,6 +48,26 @@ def get_followed_entities(user_id):
                 followed_restaurants.append(restaurant)
 
     return followed_chefs, followed_restaurants
+
+
+########################################
+def get_user_related_content(user_id):
+    # Get followed entities
+    followed_chefs, followed_restaurants = get_followed_entities(user_id)
+    print(followed_chefs, followed_restaurants)
+    related_content = []
+
+    # Get content related to followed chefs
+    for chef in followed_chefs:
+        chef_content = Content.query.filter_by(associated_id=chef.id, associated_type='chef').all()
+        related_content.extend(chef_content)
+
+    # Get content related to followed restaurants
+    for restaurant in followed_restaurants:
+        restaurant_content = Content.query.filter_by(associated_id=restaurant.id, associated_type='restaurant').all()
+        related_content.extend(restaurant_content)
+    print(f"Related Content: {related_content}")
+    return related_content
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -132,11 +152,19 @@ def home():
     
     # Query to get all check-ins for the specific user along with associated restaurant data
     checkins = CheckIn.query.filter_by(user_id=user_id).all()
-    chefs, restaurants = get_followed_entities(user_id=user_id)
+    # content = get_user_related_content(user_id=-user_id)
     if not checkins:
         # Handle case where there are no check-ins for the user
         flash("No check-ins available for this user.", "info")
-    return render_template('user-profile.html', checkins=checkins, user=current_user, chefs=chefs, active_page='home')
+    return render_template('user-profile.html', checkins=checkins, user=current_user, active_page='home')
+
+@app.route('/get-content/<int:page>')
+def get_content(page):
+    user_id = current_user.id
+    # Assuming you have a function to fetch content based on the page number
+    content_items = get_user_related_content(user_id=user_id)
+    return jsonify([item.to_dict() for item in content_items])
+    
 
 
 @app.route('/discover', methods=['GET'])
@@ -325,24 +353,7 @@ def follow_unfollow(entity_id, entity_type):
 
 
 
-#########################################
-# def get_user_related_content(user_id):
-#     # Get followed entities
-#     followed_chefs, followed_restaurants = get_followed_entities(user_id)
 
-#     related_content = []
-
-#     # Get content related to followed chefs
-#     for chef in followed_chefs:
-#         chef_content = Content.query.filter_by(associated_id=chef.id, associated_type='chef').all()
-#         related_content.extend(chef_content)
-
-#     # Get content related to followed restaurants
-#     for restaurant in followed_restaurants:
-#         restaurant_content = Content.query.filter_by(associated_id=restaurant.id, associated_type='restaurant').all()
-#         related_content.extend(restaurant_content)
-
-#     return related_content
 
 if __name__ == '__main__':
     app.run(debug=True)

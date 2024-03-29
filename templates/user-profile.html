@@ -40,13 +40,58 @@
 <!-- User Feed -->
 <div class="container mt-4">
     <div class="row">
-        <div class="w-75 col-12">{% for chef in chefs %}
-                                    {{ chef.name }}
-                                {% endfor %}                     
+        <div class="w-100 col-12">
+            <div id="content-container" style="overflow-x: auto; white-space: nowrap;">
+                <!-- Your content will go here -->
+            </div>             
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+$(function() {
+    var page = 1;
+    var loading = false;
+
+    function loadContent() {
+        if (!loading) {
+            loading = true;
+            $.getJSON('/get-content/' + page, function(data) {
+                console.log("calling function")
+                // Append new content to the container
+                $.each(data, function(i, item) {
+                    $('#content-container').append(
+                        '<a href="' + item.url + '" class="card custom-card text-decoration-none" target="_blank">' +
+                            '<img src="' + item.image_url + '" class="card-img-top custom-card-img" alt="' + item.title + '">' +
+                            '<div class="card-body custom-card-body">' +
+                                '<p class="card-text">' + item.title + '</p>' +
+                            '</div>' +
+                        '</a>'
+                    );
+                });
+                page++;
+                loading = false;
+            });
+        }
+    }
+
+    // Detect when scrolling near the end and load more content
+    $('#content-container').scroll(function() {
+        if ($(this).scrollLeft() + $(this).innerWidth() >= $(this)[0].scrollWidth - 100) {
+            loadContent();
+        }
+    });
+
+    // Initial load
+    loadContent();
+});</script>
 {% endblock %}
