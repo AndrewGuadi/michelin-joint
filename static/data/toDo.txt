@@ -1,0 +1,24 @@
+###home/User Profile#####
+----Make Followers and following clickable
+----Make Total Stars Clickable So that the user can view the past checkins that theyve made
+----New Quote
+    --Allow users to input their own quote/choose from preselected
+----Check-in Button functionality
+    --Overlay box
+----Feed Cards
+    --Show Chef/Restaurant Tags on card for easier discerning
+    --Maybe Show Users Feed as well.
+
+
+###Top 100 Page###
+----Add the other 50 restaurants
+
+
+###Discover###
+----Allow users to search by Chef or by Restaurant name
+----General Formatting for search by distance for address
+
+
+###Restaurant Pages###
+----Maybe Switch the follow button to below the restaurant data, but above the bio.
+----Better Formatting for Check-ins
