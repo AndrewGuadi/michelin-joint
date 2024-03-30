@@ -73,7 +73,7 @@
 }
 
 .custom-card-body {
-    height: 15vw;
+    /* height: 15vw; */
     overflow: hidden;
 }
 

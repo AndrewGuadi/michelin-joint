@@ -5,6 +5,15 @@ from helpers import read_json
 
 with app.app_context():
 
+    try:
+        # This will delete all records in the table
+        db.session.query(Content).delete()
+        db.session.commit()
+        print('Old Content Deleted')
+    except:
+        db.session.rollback()
+        print('Removing Old Data Failed')
+
     content = read_json('static/data/content.json')
     for item in content:
         #get the proper chef:
@@ -14,6 +23,7 @@ with app.app_context():
                                 content_type=item.get('content_type'),
                                 url=item.get('link'),
                                 image_url=item.get('image'),
+                                associated_name=item.get('chef'),
                                 associated_id=found_chef.id,
                                 associated_type='chef')
             

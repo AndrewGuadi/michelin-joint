@@ -8,7 +8,7 @@ from location_helpers import haversine, get_coordinates
 import os
 import json
 import random 
-
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
@@ -17,6 +17,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reconegut.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+
+migrate = Migrate(app, db)
 
 #import the tables
 from models import User, Restaurant, CheckIn, Friendship, Chef, Follow, Content
