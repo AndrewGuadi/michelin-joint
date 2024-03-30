@@ -22,3 +22,19 @@
 ###Restaurant Pages###
 ----Maybe Switch the follow button to below the restaurant data, but above the bio.
 ----Better Formatting for Check-ins
+----Only Allow one Checkin Click to process
+
+
+
+####Base Page####
+----Make all of logo clickable
+
+
+####Privacy Policy####
+---Clean up the look of the page
+
+####General ToDo####
+---Create separate page for Profile
+---Create Dependencies and Environment
+---Connect Friends
+---Share on Social Media

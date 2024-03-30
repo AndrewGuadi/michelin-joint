@@ -22,16 +22,7 @@
     
 </div>
 
-<div class="res-image w-100" style="background-image: url('{{ res.image_url }}');"></div><form action="{{ url_for('follow_unfollow', entity_id=res.id, entity_type='restaurant') }}" method="POST" class="mt-1 mb-2 col-12 d-flex justify-content-center">
-    {% if is_following %}
-        <button type="submit" class="follow-button mt-3 btn btn-primary w-75">Unfollow</button>
-    {% else %}
-        <button type="submit" class="follow-button mt-3 btn btn-primary w-75">Follow</button>
-    {% endif %}
-</form>
-
-<div class="row break-line my-4"></div>
-
+<div class="res-image w-100" style="background-image: url('{{ res.image_url }}');"></div>
 <div class="container-fluid">
 
     <div class="row primary-res-items pt-2">
@@ -60,6 +51,14 @@
             </div>
         </div>
     </div>
+
+    <form action="{{ url_for('follow_unfollow', entity_id=res.id, entity_type='restaurant') }}" method="POST" class="mt-1 mb-2 col-12 d-flex justify-content-center">
+        {% if is_following %}
+            <button type="submit" class="follow-button mt-3 btn btn-primary w-75">Unfollow</button>
+        {% else %}
+            <button type="submit" class="follow-button mt-3 btn btn-primary w-75">Follow</button>
+        {% endif %}
+    </form>
 
     <div class="row break-line my-3"></div>
 
