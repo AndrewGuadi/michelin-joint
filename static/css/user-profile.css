@@ -57,7 +57,7 @@
 #content-container {
     width:100%;
     /* Adjust as needed */
-    max-height: 55vw;
+    /* max-height: 55vw; */
     overflow-x: auto;
 }
 .custom-card {

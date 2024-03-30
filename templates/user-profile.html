@@ -55,6 +55,9 @@
         </div>
     </div>
 </div>
+
+<div class="break-line mt-2"></div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -83,7 +86,7 @@ $(function() {
                             '<img src="' + item.image_url + '" onerror="this.onerror=null; this.src=\'' + fallbackImageUrl + '\'" class="card-img-top custom-card-img" alt="' + item.title + '">' +
                             '<div class="card-body custom-card-body">' +
                                 '<p class="card-text">' + item.title + '</p>' +
-                                '<p>' + item.associated_type + '</p>' +
+                                '<p>' + item.chef + '</p>' +
                             '</div>' +
                         '</a>'
                     );
