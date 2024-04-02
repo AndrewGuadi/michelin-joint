@@ -8,7 +8,7 @@
         {% if loop.index0 % 2 == 0 %}
         <div class="row">
             {% endif %}
-            <div class="col-6 mb-3">
+            <div class="col-6 col-md-4 mb-3">
                 <a href="{% if res.city %}{{ url_for('top_restaurants', restaurant=res.name) }}{% else %}{{ url_for('restaurants', restaurant_name=res.name) }}{% endif %}">
                     <div class="card custom-card">
                         <img class="card-img-top" src="{{ res.image_url }}" alt="Restaurant Image">
