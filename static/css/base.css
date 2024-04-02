@@ -32,8 +32,8 @@ body {
     margin:auto;
     left:5vw;
     top:3vw;
-    border-radius: 40%;
-    border:2px solid black;
+    /* border-radius: 40%;
+    border:2px solid black; */
 }
 
 #logo{
@@ -83,7 +83,54 @@ body {
 /* Mobile First Media Queries */
 @media (min-width: 768px) {
     body {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
+    }
+
+    #logo{
+        position: relative;
+        margin:auto;
+        width:5vw;
+        height:5vw;
+        bottom:2vw;
+    }
+
+    .logo-wrapper{
+        margin:auto;
+        height:5vw;
+        width:5vw;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ifuser-wrapper{
+        display:flex;
+        top:2vw;
+        position: relative;
+        width:40vw;
+        justify-content: center;
+        left:27vw;
+    }
+
+    .ifuser-wrapper h3{
+        margin: auto;
+        margin-top:0vw;
+        width:25vw;
+        /* left:15vw; */
+    }
+
+    .ifuser-wrapper h4{
+        position: relative;
+        margin:auto;
+        /* left:-15vw; */
+    }
+
+    #logout{
+        position:relative;
+        left:35vw;
+        align-items: center;
+        bottom:2vw;
+        font-size: 1rem;
     }
 }
 

@@ -20,7 +20,7 @@
             <h3>Welcome Back,</h3>
             <h4>{{ current_user.username }}</h4>
         </div>
-        <a href="{{ url_for('logout')}}">Logout</a>
+        <a id="logout" href="{{ url_for('logout')}}">Logout</a>
         {% else %}
         <div class="ifuser-wrapper">
           <h3>Where To</h3>
@@ -51,7 +51,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Your App</p>
+        <p>&copy; 2024 Tablae</p>
     </footer>
 
     {% block scripts %} {% endblock %} 

@@ -89,3 +89,44 @@
 }
 
 
+
+
+/* ---------------------------------------------------------------------------------- */
+/* desktop display */
+@media screen and (min-width: 768px) {
+    /* Styles for screens wider than 768 pixels go here */
+    
+    .profile-image{
+        height:10vw;
+        width:10vw;   
+    }
+
+    .profile-starcount h3 {
+        font-size: 4vw;
+    }
+
+    .profile-starcount h6 {
+        font-size: 5vw;
+    }
+
+    .profile-quote {
+        font-size: 0.5rem;
+    }
+
+    #checkin {
+        font-size: 1rem;
+        padding: 0vw;
+        width: auto;
+        height: auto;
+        align-items: center;
+    }
+
+    .custom-card {
+        width: 20%;
+    }
+
+    .custom-card-img {
+        height: 15vw;
+        object-fit: cover;
+    }
+}
