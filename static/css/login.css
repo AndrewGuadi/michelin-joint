@@ -126,3 +126,25 @@ body{
     position: relative;
     width:5vw;
 }
+
+
+/* ---------------------------------------------------------------------------------- */
+/* desktop display */
+@media screen and (min-width: 768px) {
+    /* Styles for screens wider than 1024 pixels go here */
+
+    .info-image{
+        height:15vw;
+        width:15vw;
+        margin:auto;
+        position: relative;
+    }
+
+    .login-form {
+        padding: auto;
+        display: block;
+        margin: auto;
+    }
+
+
+}

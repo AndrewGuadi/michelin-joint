@@ -20,7 +20,6 @@
 
 
 ###Restaurant Pages###
-----Maybe Switch the follow button to below the restaurant data, but above the bio.
 ----Better Formatting for Check-ins
 ----Only Allow one Checkin Click to process
 

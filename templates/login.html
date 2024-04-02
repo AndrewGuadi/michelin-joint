@@ -42,12 +42,12 @@
                         <p class="visually-hidden"> {{ login_form.password.label }}</p>
                         {{ login_form.password(placeholder='Password')}}
                         
-                        <div class="row">
-                            <div class='col'>
+                        <div class="row justify-content-center">
+                            <div class='col justify-content-center d-flex'>
                                 <a href="{{ url_for('register') }}"><button type="button" class="btn btn-info">Register</button></a>
                             </div>
 
-                            <div class="col">
+                            <div class="col justify-content-center d-flex">
                                 <p> {{ login_form.submit() }}</p>
                             </div>
                         </div>
